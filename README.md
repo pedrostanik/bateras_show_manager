@@ -28,5 +28,5 @@ Este é um sistema de **gestão de apresentações de bandas** para uma **escola
 ### 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/escuela-musica.git
-cd escuela-musica
+git clone https://github.com/pedrostanik/bateras_show_manager.git
+cd bateras_show_manager
