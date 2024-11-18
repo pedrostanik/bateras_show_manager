@@ -1,0 +1,45 @@
+{% extends 'bands/base.html' %}
+{% load static %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+
+<!-- <div class="manager-frequency">
+    <input class="numero-limitado" type="number">
+    <button class="button-manager">Aplicar Limite</button>
+</div> -->
+<div class="eventos-container">
+    {% if bandas %}
+        <div class="cards-eventos">
+            {% for banda in bandas %}
+                <div class="card-banda">
+                    <a href="{% url 'editar_banda' banda_id=banda.id %}">
+                        <div>
+                            <h2 style="color: #0c77db; font-weight: bold;">{{ banda.banda }}</h2>
+                            {% if banda.integrantes %}
+                                {% for integrante in banda.integrantes %}
+                                    <div class="itens-banda" style="color: rgba(255, 255, 255, 0.898); align-items: center; display: flex;">
+                                        <img style="margin-right: 3%; color: rgb(161, 41, 41);" class="icon-papel" src="{% static 'assets/' %}{{ integrante.papel }}.png">
+                                        <span>{{integrante.nome}}</span>
+                                    </div>                                 
+                                {% endfor %}
+                            {% endif %}
+                            <!-- <p><strong>Local:</strong> {{ banda.local }}</p>
+                            <p><strong>Status:</strong> {% if banda.aberto %} Aberto {% else %} Fechado {% endif %}</p> -->
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        
+    {% else %}
+        <div class="event-not-found"> 
+            <h1>Ainda não há bandas registrados!</h1>            
+        </div>        
+    {% endif %}  
+    <a style="display: flex; align-items: center; justify-content: center; width: 20%; margin: auto; background-color: rgb(8, 17, 115); font-family: Arial, Helvetica, sans-serif;" href="{% url 'register_banda' %}" class="button-registrar-evento">REGISTRAR BANDA</a>  
+</div>
+
+ <!-- <div class="side-info"></div> -->
+{% endblock %}

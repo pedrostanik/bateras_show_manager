@@ -1,0 +1,142 @@
+{% extends 'bands/base.html' %}
+{% load static %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+
+
+{% if bandas %}
+<div class="page-container">
+    <div class="checkbox-list" id="checkbox-list">
+        <div class="search-alunos">
+            <input class="value-max" id="value-max" type="number">
+            <button id="search-students">Aplicar limite máx.</button>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="cards-bandas">
+            {% for banda in bandas %}
+            <div class="card-banda">
+                <a href="{% url 'editar_banda' banda_id=banda.id %}">
+                    <div>
+                        <h2 style="color: #0c77db; font-weight: bold;">{{ banda.banda }}</h2>
+                        {% if banda.integrantes %}
+                        {% for integrante in banda.integrantes %}
+                        <div class="itens-banda"
+                            style="color: rgba(255, 255, 255, 0.898); align-items: center; display: flex;">
+                            <img style="margin-right: 3%; color: rgb(161, 41, 41);" class="icon-papel"
+                                src="{% static 'assets/' %}{{ integrante.papel }}.png">
+                            <span data-nome="{{integrante.nome}}">{{integrante.nome}}</span>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        <!-- <p><strong>Local:</strong> {{ banda.local }}</p>
+                            <p><strong>Status:</strong> {% if banda.aberto %} Aberto {% else %} Fechado {% endif %}</p> -->
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="registro-div" style="align-items: center;">
+            <a href="{% url 'register_banda' %}" class="button-registrar-evento">REGISTRAR BANDA</a>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<div class="event-not-found">
+    <h1>Ainda não há bandas registrados!</h1>
+</div>
+{% endif %}
+
+
+<script>
+    console.log('loaded!')
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById('search-students').onclick = function () {
+            let maxNumber = document.getElementById('value-max').value;
+            console.log('maxNumber: ' + maxNumber)
+            chamarMinhaView(maxNumber)
+                .then(jsonStudents => {
+                    console.log('jsonStudents: ' + jsonStudents);
+                    const checkboxList = document.getElementById('checkbox-list');
+
+                    // Limpa apenas os checkboxes e labels, mantendo a estrutura do input e do botão
+                    while (checkboxList.children.length > 1) {
+                        checkboxList.removeChild(checkboxList.lastChild); // Remove o último filho até que reste apenas o input e o botão
+                    }
+
+                    jsonStudents.forEach(student => {
+
+                        console.log(`Nome: ${student.nome_musico}, Contagem: ${student.nome_count}`);
+                        let nameStudent = student.nome_musico;
+                        let count = student.nome_count;
+
+                        // Cria o checkbox e o label                        
+                        const checkbox = document.createElement('input');
+                        checkbox.setAttribute('type', 'checkbox')
+                        checkbox.setAttribute('id', nameStudent);
+
+                        const label = document.createElement('label');
+                        label.setAttribute('for', nameStudent);
+                        label.textContent = `${nameStudent} (${count})`;
+                        label.style.color = 'white'
+
+
+
+                        checkbox.addEventListener('click', function () {
+                            // Encontra todos os elementos span com o nome correspondente
+                            const spanElements = document.querySelectorAll(`span[data-nome="${nameStudent}"]`);
+
+                            // Verifica se há elementos correspondentes
+                            if (spanElements.length > 0) {
+                                // Itera sobre cada elemento encontrado e aplica a cor
+                                spanElements.forEach(span => {
+                                    if (checkbox.checked) {
+                                        span.style.color = 'red'; // Cor para quando o checkbox está selecionado
+                                    } else {
+                                        span.style.color = ''; // Retorna à cor padrão quando desmarcado
+                                    }
+                                });
+                            }
+                        });
+
+
+                        // Adiciona o checkbox e o label à lista
+                        checkboxList.appendChild(checkbox);
+                        checkboxList.appendChild(label);
+                        checkboxList.appendChild(document.createElement('br'));
+                    });
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar dados:', error);
+                });
+
+
+        }
+
+        // document.getElementById('search-students').onclick = function () {
+        //     console.log('got in [2]!')
+
+
+
+        // }
+
+        async function chamarMinhaView(maxNumber) {
+            return fetch("{% url 'get_students' %}?max_number=" + encodeURIComponent(maxNumber), {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro na requisição');
+                    }
+                    return response.json(); // Retorna o JSON para o chamador
+                });
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'bands/base.html' %}
+{% load static %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+<!-- Importa o arquivo de estilos personalizado -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+
+<div class="form-container">
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form.visible_fields %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn-submit">Registrar</button>
+    </form>
+</div>
+{% endblock %}

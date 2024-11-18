@@ -1,0 +1,497 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+h1,
+h2,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    /* Garante que não haja espaço no topo */
+    padding-top: 0;
+    /* Remove padding superior */
+    position: relative;
+    /* Mantém a imagem no fluxo normal da página */
+}
+
+.image-logo {
+    width: 250px;
+    height: auto;
+    margin-top: 0;
+    /* Garante que a imagem não tenha margem superior */
+    padding-top: 0;
+    /* Garante que a imagem não tenha padding superior */
+}
+
+.image-guitarra {
+    width: 300px;
+    margin-right: 50%;
+}
+
+.image-drum {
+    width: 300px;
+    margin-left: 50%;
+}
+.home-page {
+    background-color: rgb(255, 255, 255);
+    margin: 0 auto;
+    /* Centraliza a div horizontalmente */
+    height: 100vh;
+    /* Altura total da página */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* Centraliza verticalmente */
+    align-items: center;
+    margin-top: 3dvb;
+    /* Centraliza horizontalmente */
+}
+
+/* Centraliza o menu */
+#main-menu {
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+}
+
+#main-menu>ul {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+    /* Centraliza os itens do menu */
+}
+
+#main-menu>ul>li {
+    margin: 0 20px;
+}
+
+#main-menu>ul>li>a {
+    color: rgb(232, 226, 226);
+    background-color: rgb(161, 41, 41);
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgb(122, 120, 120);
+    /* Adiciona uma sombra suave */
+
+    transition: background-color 0.3s;
+    /* font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    font-style: normal; */
+    font-variation-settings:
+        "ELSH" 0;
+    font-size: 30px;
+
+    font-family: "Bowlby One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#main-menu>ul>li>a:hover {
+    background-color: rgb(65, 13, 13);
+    color: transparent;
+    /* Torna o texto invisível */
+    background-image: url('/static/assets/rock.png');
+    background-size: 50px;
+    /* Define a largura e altura em 50% do botão */
+    background-repeat: no-repeat;
+    /* Impede a repetição da imagem */
+    background-position: center;
+    /* Centraliza a imagem no botão */
+
+    transform: translateY(-2px);
+    /* Efeito de elevação */
+}
+
+/* Ajuste opcional para mobile */
+@media (max-width: 768px) {
+    #main-menu>ul {
+        flex-direction: column;
+        /* Deixa o menu vertical em telas menores */
+    }
+
+    #main-menu>ul>li {
+        margin: 10px 0;
+    }
+}
+
+/* Container principal dos eventos */
+.eventos-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    background-color: #000;
+    margin-top: 10%;
+}
+
+/* Estilo para o contêiner de cards */
+.cards-eventos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+
+/* Estilo para cada card de evento */
+.card-evento {
+    width: 250px;
+    background-color: #272727;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding-top: 10%;
+}
+
+/* Estilo para cada card de evento */
+.card-evento>a {
+    text-decoration: none;
+
+}
+
+.card-banda {
+    /* width: 250px;
+    background-color: #0d6bae;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; */
+
+    width: 250px;
+    background-color: #525252e2;
+    border-radius: 10px;
+    padding: 10%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Estilo para cada card de evento */
+.card-banda>a {
+    text-decoration: none;
+
+}
+
+
+/* Estilo interno do conteúdo do card */
+.card-content-evento h2 {
+    color: #0c77db;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.card-content-evento p {
+    color: #e0e0e0;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+/* Hover para um efeito de elevação */
+.card-evento-evento:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+}
+
+/* Estilo interno do conteúdo do card */
+.card-content-banda h2 {
+    /* color: #ffffff;
+    font-size: 20px;
+    margin-bottom: 10px; */
+
+    color: #0c77db;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.card-content-banda p {
+    color: #e0e0e0;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+/* Hover para um efeito de elevação */
+.card-evento-banda:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+}
+
+.button-registrar-evento {
+    margin-top: 50px;
+    /* Adiciona 20px de espaçamento acima do botão */
+    padding: 10px 20px;
+    /* Ajusta o espaçamento interno do botão */
+    background-color: darkred;
+    /* Cor de fundo */
+    color: white;
+    /* Cor do texto */
+    text-decoration: none;
+    /* Remove o sublinhado */
+    border-radius: 5px;
+    /* Borda arredondada */
+    display: inline-block;
+    /* Mantém o botão como elemento inline */
+}
+
+.event-not-found {
+    text-align: center;
+    margin-top: 10%;
+}
+
+/* Estilo para o contêiner do formulário */
+.form-container {
+    width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.botoes-form-banda {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/* Estilo para cada grupo de campo  TODO TODO TODO GAMBI*/
+
+.form-group {
+    margin-right: 4%;
+    margin-bottom: 20px;
+
+}
+
+/* Centralizar e estilizar os labels */
+.form-group label {
+    color: #ffffff;
+    text-align: center;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+/* Estilo para os campos de entrada */
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para checkbox */
+input[type="checkbox"] {
+    width: auto;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Estilo para o botão de envio */
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #45a049;
+}
+
+.icon-papel {
+    width: 10%;
+    height: 10%;
+}
+
+.itens-banda {
+    margin-top: 30px;
+}
+
+.manager-frequency {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    /* Espaçamento entre os elementos */
+}
+
+.numero-limitado {
+    width: 100px;
+    /* Largura do input */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #ffffff !important;
+    /* Cor do texto do input */
+}
+
+.button-manager {
+    padding: 8px 16px;
+    background-color: #007bff;
+    /* Cor de fundo */
+    color: white;
+    /* Cor do texto */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button-manager:hover {
+    background-color: #0056b3;
+    /* Cor de fundo ao passar o mouse */
+}
+
+.manager-frequency input[type="number"] {
+    appearance: textfield;
+}
+
+.manager-frequency input[type="number"]::-webkit-outer-spin-button,
+.manager-frequency input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+    /* Remove setas de incremento */
+}
+
+.content-container {
+    display: flex;
+}
+
+.main-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #292727;
+    margin-right: 0;
+}
+
+.page-container {
+    
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* Centraliza a main-container */
+    align-items: center; /* Alinha os itens ao topo */
+    gap: 20px; /* Espaço entre a checkbox-list e a main-container */
+    margin: 0 auto; /* Centraliza o contêiner principal na tela */
+    margin-left: -40px; /* Ajuste conforme necessário para deslocar à esquerda */
+
+}
+
+.main-container {
+    position: absolute;
+    top: 35%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    padding: 20px;
+    text-align: center;
+
+    /* display: flex;
+    flex-direction: column; 
+    align-items: center; */
+
+}
+
+.cards-bandas {
+    position: relative;
+    margin-top: 3%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    justify-content: center;
+    padding-bottom: 3%;    
+}
+
+.checkbox-list {
+    position: absolute;
+    /* margin-top: 0; */
+    /* margin-left: 0; */
+    top: 3%;
+    left: 3%;
+    width: 15%; /* Defina a largura que preferir */
+    height: 100%;
+    padding-top: 3%;
+    padding-left: 3%;
+    background-color: #a93f3f;
+    border: 2px solid #0c77db;
+    border-radius: 5%; /* Arredonda os cantos */
+
+
+    /* flex: 0 0 auto;
+    width: 10%;
+    height: 100%;
+    margin-top: 3%;
+    margin-left: 0;
+    flex-shrink: 0; */
+    
+}
+
+.search-alunos {
+    display: flex;
+}
+
+.value-max {
+    width: 40%;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.button-registrar-evento {
+    padding: 10px 20px;
+    background-color: darkred;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.registro-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px; /* Adicione um espaço se necessário */
+}
+
+.button-registrar-evento {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    width: 20%; 
+    background-color: #0c77db; 
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+

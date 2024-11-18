@@ -1,0 +1,159 @@
+{% extends 'bands/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="form-container">
+    <form
+        action="{% if edit %}{% url 'editar_banda' banda_id=banda.id %}{% else %}{% url 'register_banda' %}{% endif %}"
+        method="POST">
+        {% csrf_token %}
+        {{ musico_formset.management_form }}
+        {{ banda_form.as_p }}
+        <h3>Integrantes da Banda:</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nome do Músico</th>
+                    <th>CPF Músico</th>
+                    <th>Instrumento</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="musicos-table-body">
+                {% for form in musico_formset %}
+                <tr class="musico-form-row">
+                    {{ form.id }}
+                    <td>{{ form.nome_musico }}</td>
+                    <td>{{ form.cpf_musico }}</td>
+                    <td>{{ form.papel }}</td>
+                    <td>
+                        <input type="hidden" name="form-{{ forloop.counter0 }}-DELETE"
+                            id="id_form-{{ forloop.counter0 }}-DELETE" value="False">
+                        <button type="button" class="btn btn-danger btn-remove">Remover</button>
+                    </td>
+                </tr>
+                {% if request.method == 'POST' %}
+                {% for message in messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="botoes-form-banda">
+            <button type="button" id="add-musico" class="btn btn-secondary">Adicionar Músico</button>
+            {% if edit %}
+            <div class="botoes-form-banda-submissao">
+                <button type="submit" class="btn btn-primary" name="btn_att">Atualizar</button>
+                {% else %}
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </div>
+            {% endif %}
+            <a href="{% url 'cancelar_registro_banda' %}">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    // let index = parseInt(document.getElementById('total-forms').dataset.totalForms, 10); // Obtém o valor do data attribute
+    let index = parseInt(document.getElementById('id_form-TOTAL_FORMS').value, 10);
+    console.log('index: ' + index)
+
+    document.getElementById('add-musico').onclick = function () {
+
+        const tableBody = document.getElementById('musicos-table-body');
+
+        // Cria uma nova linha (tr) para adicionar
+        const newRow = document.createElement('tr');
+        newRow.classList.add('musico-form-row');
+
+        // Nome do Músico (coluna)
+        const nomeCell = document.createElement('td');
+        const nomeInput = document.createElement('input');
+        nomeInput.setAttribute('type', 'text');
+        nomeInput.setAttribute('name', 'form-' + index + '-nome_musico');
+        nomeInput.classList.add('form-control');
+        nomeCell.appendChild(nomeInput);
+
+        // CPF do Músico (coluna)
+        const cpfCell = document.createElement('td');
+        const cpfInput = document.createElement('input');
+        cpfInput.setAttribute('type', 'text');
+        cpfInput.setAttribute('name', 'form-' + index + '-cpf_musico');
+        cpfInput.classList.add('form-control');
+        cpfCell.appendChild(cpfInput);
+
+        // Instrumento (coluna)
+        const papelCell = document.createElement('td');
+        const papelSelect = document.createElement('select');
+        papelSelect.setAttribute('name', 'form-' + index + '-papel');
+        papelSelect.classList.add('form-control');
+
+        // Opções de papel
+        const options = ['Vocalista', 'Guitarrista', 'Baterista', 'Tecladista', 'Baixista'];
+        options.forEach(optionText => {
+            const option = document.createElement('option');
+            option.value = optionText;
+            option.text = optionText;
+            papelSelect.appendChild(option);
+        });
+        papelCell.appendChild(papelSelect);
+
+        // Campo oculto para DELETE
+        const removeCell = document.createElement('td');
+        const deleteInput = document.createElement('input');
+        deleteInput.setAttribute('type', 'hidden');
+        deleteInput.setAttribute('name', 'form-' + index + '-DELETE');
+        deleteInput.setAttribute('value', 'False'); // Padrão é False
+        removeCell.appendChild(deleteInput);
+
+        // Botão de remover (coluna)
+        const removeButton = document.createElement('button');
+        removeButton.setAttribute('type', 'button');
+        removeButton.classList.add('btn', 'btn-danger', 'btn-remove');
+        removeButton.innerText = 'Remover';
+        removeButton.onclick = function () {
+            deleteInput.value = 'True'; // Marca o campo como True
+            // Atualiza o valor de TOTAL_FORMS
+            newRow.style.display = 'none'; // Oculta a linha
+            document.getElementById('id_form-TOTAL_FORMS').value = document.querySelectorAll('.musico-form-row').length;
+
+        };
+        removeCell.appendChild(removeButton);
+
+        // Adiciona as colunas à linha
+        newRow.appendChild(nomeCell);
+        newRow.appendChild(cpfCell);
+        newRow.appendChild(papelCell);
+        newRow.appendChild(removeCell);
+
+        // Adiciona a nova linha ao corpo da tabela
+        tableBody.appendChild(newRow);
+
+        // Incrementa o TOTAL_FORMS no management form
+        index++;
+        console.log('index: ' + index)
+        document.getElementById('id_form-TOTAL_FORMS').value = index;
+
+
+    };
+
+    // Adiciona o evento de click para todos os botões de remover
+    document.querySelectorAll('.btn-remove').forEach(function (button) {
+        button.onclick = function () {
+            const row = this.closest('.musico-form-row'); // Obtém a linha correspondente
+            const deleteInput = row.querySelector('input[type="hidden"][name*="DELETE"]'); // Seleciona o campo DELETE
+            deleteInput.value = 'True'; // Atualiza o valor para True
+            row.style.display = 'none'; // Oculta a linha
+
+
+
+            // Ajusta o total de formulários no management form após remoção
+            document.getElementById('id_form-TOTAL_FORMS').value = document.querySelectorAll('.musico-form-row').length;
+        };
+    });
+</script>
+{% endblock %}

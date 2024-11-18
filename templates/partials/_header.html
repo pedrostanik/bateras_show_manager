@@ -1,0 +1,16 @@
+{% load static %}
+
+<div class="logo">
+    <!-- <img src="{% static 'assets/guitarra.png' %}" class="image-guitarra"> -->
+    <img src="{% static 'assets/logo.png' %}" class="image-logo">
+    <!-- <img src="{% static 'assets/drum.png' %}" class="image-drum"> -->
+</div>
+<header>    
+    <nav id="main-menu">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'eventos' %}">Bateras Show</a></li>
+            <li><a href="#">Galeria</a></li>
+        </ul>
+    </nav>
+</header>

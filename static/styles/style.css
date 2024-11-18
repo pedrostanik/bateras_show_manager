@@ -1,0 +1,132 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+h1,
+h2,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    /* Garante que não haja espaço no topo */
+    padding-top: 0;
+    /* Remove padding superior */
+    position: relative;
+    /* Mantém a imagem no fluxo normal da página */
+}
+
+.image-logo {
+    width: 150px;
+    height: auto;
+    margin-top: 0;
+    /* Garante que a imagem não tenha margem superior */
+    padding-top: 0;
+    /* Garante que a imagem não tenha padding superior */
+}
+
+.home-page {
+    background-color: black;
+    margin: 0 auto;
+    /* Centraliza a div horizontalmente */
+    height: 100vh;
+    /* Altura total da página */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* Centraliza verticalmente */
+    align-items: center;
+    margin-top: 3dvb;
+    /* Centraliza horizontalmente */
+}
+
+/* Centraliza o menu */
+#main-menu {
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+}
+
+#main-menu>ul {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+    /* Centraliza os itens do menu */
+}
+
+#main-menu>ul>li {
+    margin: 0 20px;
+}
+
+#main-menu>ul>li>a {
+    color: rgb(232, 226, 226);
+    background-color: rgb(161, 41, 41);
+    text-decoration: none;  
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgb(122, 120, 120); /* Adiciona uma sombra suave */
+    
+    transition: background-color 0.3s;
+    /* font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    font-style: normal; */
+    font-variation-settings:
+        "ELSH" 0;
+    font-size: 30px;
+
+    font-family: "Bowlby One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#main-menu>ul>li>a:hover {
+    background-color: rgb(65, 13, 13);
+    color: transparent; /* Torna o texto invisível */
+    background-image: url('setup/static/assets/rocknroll.png'); 
+   
+    background-position: center; /* Centraliza a imagem no botão */
+    transform: translateY(-2px); /* Efeito de elevação */
+}
+
+/* Ajuste opcional para mobile */
+@media (max-width: 768px) {
+    #main-menu>ul {
+        flex-direction: column;
+        /* Deixa o menu vertical em telas menores */
+    }
+
+    #main-menu>ul>li {
+        margin: 10px 0;
+    }
+}
+
+.button-registrar-evento {
+    margin-top: 50px;
+    /* Adiciona 20px de espaçamento acima do botão */
+    padding: 10px 20px;
+    /* Ajusta o espaçamento interno do botão */
+    background-color: darkred;
+    /* Cor de fundo */
+    color: white;
+    /* Cor do texto */
+    text-decoration: none;
+    /* Remove o sublinhado */
+    border-radius: 5px;
+    /* Borda arredondada */
+    display: inline-block;
+    /* Mantém o botão como elemento inline */
+}
+
+.event-not-found {
+    text-align: center;
+    margin-top: 10%;
+}

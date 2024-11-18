@@ -1,0 +1,30 @@
+{% extends 'bands/base.html' %}
+{% load static %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+<div class="eventos-container">
+    {% if eventos %}
+        <div class="cards-eventos">
+            {% for evento in eventos %}
+                <div class="card-evento">
+                    <a href="{% url 'bandas' %}">
+                        <div class="card-content-evento">
+                            <h2>{{ evento.data }}</h2>
+                            <p><strong>Local:</strong> {{ evento.local }}</p>
+                            <p><strong>Status:</strong> {% if evento.aberto %} Aberto {% else %} Fechado {% endif %}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        
+    {% else %}
+        <div class="event-not-found"> 
+            <h1>Ainda não há eventos registrados!</h1>
+            <a href="{% url 'evento_form' %}" class="button-registrar-evento">Registrar novo evento</a>
+        </div>        
+    {% endif %}
+</div>
+{% endblock %}
